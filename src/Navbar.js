@@ -53,7 +53,7 @@ class Navbar extends React.Component {
           </Select>
         </div>
         <Snackbar
-          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
           open={this.state.open}
           autoHideDuration={3000}
           message={

@@ -6,6 +6,11 @@ import "./App.css";
 import React from "react";
 
 class App extends React.Component {
+  findPalette(id) {
+    return seedColors.find(function (palette) {
+      return palette.id === id;
+    });
+  }
   render() {
     return (
       <Switch>
@@ -13,7 +18,13 @@ class App extends React.Component {
         <Route
           exact
           path="/palette/:id"
-          render={() => <h1>individual palette</h1>}
+          render={(routeProps) => (
+            <Palette
+              palette={generatePalette(
+                this.findPalette(routeProps.match.params.id)
+              )}
+            />
+          )}
         />
       </Switch>
       // <div className="App">

@@ -32,7 +32,7 @@ class SingleColorPalette extends React.Component {
         key={color.name}
         name={color.name}
         background={color[format]}
-        showLink={false}
+        showingFullPalette={false}
       />
     ));
     return (

@@ -1,6 +1,6 @@
 import React from "react";
-import classnames from "classnames";
-import { withStyles } from "@material-ui/styles";
+import clsx from "clsx";
+import { withStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
@@ -11,6 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import { Button, colors } from "@material-ui/core";
+import DraggableColorBox from "./DraggableColorBox";
 import { ChromePicker } from "react-color";
 
 const drawerWidth = 400;
@@ -57,7 +58,8 @@ const styles = (theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 3,
+    height: "calc(100vh - 64px)",
+    padding: theme.spacing(1),
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -109,7 +111,7 @@ class NewPaletteForm extends React.Component {
         <CssBaseline />
         <AppBar
           position="fixed"
-          className={classnames(classes.appBar, {
+          className={clsx(classes.appBar, {
             [classes.appBarShift]: open,
           })}
         >
@@ -119,7 +121,7 @@ class NewPaletteForm extends React.Component {
               aria-label="open drawer"
               onClick={this.handleDrawerOpen}
               edge="start"
-              className={classnames(classes.menuButton, open && classes.hide)}
+              className={clsx(classes.menuButton, open && classes.hide)}
             >
               <MenuIcon />
             </IconButton>
@@ -166,16 +168,15 @@ class NewPaletteForm extends React.Component {
           </Button>
         </Drawer>
         <main
-          className={classnames(classes.content, {
+          className={clsx(classes.content, {
             [classes.contentShift]: open,
           })}
         >
           <div className={classes.drawerHeader} />
-          <ul>
-            {this.state.colors.map((color) => (
-              <li style={{ backgroundColor: color }}>{color}</li>
-            ))}
-          </ul>
+
+          {this.state.colors.map((color) => (
+            <DraggableColorBox color={color} />
+          ))}
         </main>
       </div>
     );

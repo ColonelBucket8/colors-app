@@ -14,7 +14,7 @@ const styles = {
     },
   },
   colors: {
-    backgroundColor: "grey",
+    // backgroundColor: "grey",
   },
   title: {
     display: "flex",

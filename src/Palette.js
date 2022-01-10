@@ -4,7 +4,6 @@ import Navbar from "./Navbar";
 import PaletteFooter from "./PaletteFooter";
 import styles from "./styles/PaletteStyles";
 import { withStyles } from "@material-ui/styles";
-import "./Palette.css";
 
 class Palette extends React.Component {
   constructor(props) {

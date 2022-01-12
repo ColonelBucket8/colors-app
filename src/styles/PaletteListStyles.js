@@ -1,4 +1,5 @@
 import sizes from "./sizes";
+import bg from "./subtle-prism.svg";
 
 export default {
   root: {
@@ -7,6 +8,13 @@ export default {
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "center",
+    /* background by SVGBackgrounds.com */
+    backgroundColor: "#44FFEE",
+    backgroundImage: `url(${bg})`,
+    overflow: "scroll",
+  },
+  heading: {
+    fontSize: "2rem",
   },
   container: {
     width: "50%",
@@ -26,9 +34,9 @@ export default {
     width: "100%",
     justifyContent: "space-between",
     alignItems: "center",
-    color: "white",
+    color: "black",
     "& a": {
-      color: "white",
+      color: "black",
     },
   },
   palettes: {
@@ -42,7 +50,7 @@ export default {
     },
     [sizes.down("xs")]: {
       gridTemplateColumns: "repeat(1 ,100%)",
-      gridGap: "1rem",
+      gridGap: "1.4rem",
     },
   },
 };

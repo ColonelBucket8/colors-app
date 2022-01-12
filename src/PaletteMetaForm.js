@@ -52,6 +52,7 @@ class PaletteMetaForm extends React.Component {
       emoji: emoji.native,
     };
     this.props.handleSubmit(newPalette);
+    this.setState({ stage: "" });
   }
   render() {
     const { newPaletteName } = this.state;

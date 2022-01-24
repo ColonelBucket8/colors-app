@@ -6,19 +6,15 @@ import { generatePalette } from "./colorHelpers";
 import PaletteList from "./PaletteList";
 import SingleColorPalette from "./SingleColorPalette";
 import NewPaletteForm from "./NewPaletteForm";
+import { useLocalStorageState } from "./hooks/useLocalStorageState";
 
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Page from "./Page";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    const savedPalettes = JSON.parse(window.localStorage.getItem("palettes"));
-    this.state = { palettes: savedPalettes || seedColors };
-    this.savePalette = this.savePalette.bind(this);
-    this.findPalette = this.findPalette.bind(this);
-    this.deletePalette = this.deletePalette.bind(this);
-  }
+function App () {
+  
+    const [palettes, setPalettes] = useLocalStorageState("palettes", seedColors);
+    
   findPalette(id) {
     return this.state.palettes.find(function (palette) {
       return palette.id === id;
@@ -46,7 +42,7 @@ class App extends React.Component {
       JSON.stringify(this.state.palettes)
     );
   }
-  render() {
+  
     return (
       <Route
         render={({ location }) => (
@@ -122,8 +118,7 @@ class App extends React.Component {
           </TransitionGroup>
         )}
       />
-    );
-  }
+    )
 }
 
 export default App;

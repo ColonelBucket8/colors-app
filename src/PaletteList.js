@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
 import Dialog from "@material-ui/core/Dialog";
@@ -101,4 +102,5 @@ class PaletteList extends React.Component {
     );
   }
 }
-export default withStyles(styles)(PaletteList);
+
+export default connect()(withStyles(styles)(PaletteList));

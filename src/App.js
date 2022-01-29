@@ -1,11 +1,13 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 import Palette from "./Palette";
 import seedColors from "./seedColors";
 import { generatePalette } from "./colorHelpers";
 import PaletteList from "./PaletteList";
 import SingleColorPalette from "./SingleColorPalette";
 import NewPaletteForm from "./NewPaletteForm";
+import { setCurrentPalette } from "./redux/palette/palette.actions";
 
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Page from "./Page";
@@ -19,6 +21,7 @@ class App extends React.Component {
     this.findPalette = this.findPalette.bind(this);
     this.deletePalette = this.deletePalette.bind(this);
   }
+
   findPalette(id) {
     return this.state.palettes.find(function (palette) {
       return palette.id === id;
@@ -126,4 +129,12 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = ({ palette }) => ({
+  currentPalette: palette.currentPalette,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentPalette: (palette) => dispatch(setCurrentPalette(palette)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

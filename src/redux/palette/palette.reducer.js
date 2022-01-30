@@ -4,7 +4,7 @@ import seedColors from "../../seedColors";
 const savedPalettes = JSON.parse(window.localStorage.getItem("palettes"));
 
 const INITIAL_STATE = {
-  currentPalette: savedPalettes || seedColors,
+  currentPalette: [],
 };
 
 const paletteReducer = (state = INITIAL_STATE, action) => {
@@ -12,7 +12,7 @@ const paletteReducer = (state = INITIAL_STATE, action) => {
     case PaletteActionTypes.SET_CURRENT_PALETTE:
       return {
         ...state,
-        currentPalette: action.payload,
+        currentPalette: [savedPalettes || seedColors, action.payload],
       };
 
     default:

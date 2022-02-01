@@ -1,10 +1,9 @@
 import { PaletteActionTypes } from "./palette.types";
 import seedColors from "../../seedColors";
-
-const savedPalettes = JSON.parse(window.localStorage.getItem("palettes"));
+import { savedPalettes, syncLocalStorage } from "./palette.utils";
 
 const INITIAL_STATE = {
-  currentPalette: [],
+  palettes: savedPalettes || seedColors,
 };
 
 const paletteReducer = (state = INITIAL_STATE, action) => {
@@ -12,7 +11,20 @@ const paletteReducer = (state = INITIAL_STATE, action) => {
     case PaletteActionTypes.SET_CURRENT_PALETTE:
       return {
         ...state,
-        currentPalette: [savedPalettes || seedColors, action.payload],
+        palettes: state.palettes,
+      };
+
+    case PaletteActionTypes.SAVE_PALETTE:
+      return {
+        ...state,
+        palettes: [...state.palettes, action.payload],
+      };
+    case PaletteActionTypes.DELETE_PALETTE:
+      return {
+        ...state,
+        palettes: state.palettes.filter(
+          (palette) => palette.id !== action.payload.id
+        ),
       };
 
     default:

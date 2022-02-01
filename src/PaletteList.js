@@ -103,4 +103,8 @@ class PaletteList extends React.Component {
   }
 }
 
-export default connect()(withStyles(styles)(PaletteList));
+const mapStateToProps = (state) => ({
+  palettes: state.palette.palettes,
+});
+
+export default connect(mapStateToProps)(withStyles(styles)(PaletteList));

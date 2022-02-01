@@ -12,43 +12,45 @@ import { setCurrentPalette } from "./redux/palette/palette.actions";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Page from "./Page";
 
+const savedPalettes = JSON.parse(window.localStorage.getItem("palettes"));
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     const savedPalettes = JSON.parse(window.localStorage.getItem("palettes"));
     this.state = { palettes: savedPalettes || seedColors };
-    this.savePalette = this.savePalette.bind(this);
-    this.findPalette = this.findPalette.bind(this);
-    this.deletePalette = this.deletePalette.bind(this);
+    // this.savePalette = this.savePalette.bind(this);
+    // this.findPalette = this.findPalette.bind(this);
+    // this.deletePalette = this.deletePalette.bind(this);
   }
 
-  findPalette(id) {
-    return this.state.palettes.find(function (palette) {
-      return palette.id === id;
-    });
-  }
+  // findPalette(id) {
+  //   return this.state.palettes.find(function (palette) {
+  //     return palette.id === id;
+  //   });
+  // }
 
-  deletePalette(id) {
-    this.setState(
-      (st) => ({
-        palettes: st.palettes.filter((palette) => palette.id !== id),
-      }),
-      this.syncLocalStorage
-    );
-  }
+  // deletePalette(id) {
+  //   this.setState(
+  //     (st) => ({
+  //       palettes: st.palettes.filter((palette) => palette.id !== id),
+  //     }),
+  //     this.syncLocalStorage
+  //   );
+  // }
 
-  savePalette(newPalette) {
-    this.setState(
-      { palettes: [...this.state.palettes, newPalette] },
-      this.syncLocalStorage
-    );
-  }
-  syncLocalStorage() {
-    window.localStorage.setItem(
-      "palettes",
-      JSON.stringify(this.state.palettes)
-    );
-  }
+  // savePalette(newPalette) {
+  //   this.setState(
+  //     { palettes: [...this.state.palettes, newPalette] },
+  //     this.syncLocalStorage
+  //   );
+  // }
+  // syncLocalStorage() {
+  //   window.localStorage.setItem(
+  //     "palettes",
+  //     JSON.stringify(this.state.palettes)
+  //   );
+  // }
   render() {
     return (
       <Route
@@ -62,8 +64,8 @@ class App extends React.Component {
                   render={(routeProps) => (
                     <Page>
                       <NewPaletteForm
-                        savePalette={this.savePalette}
-                        palettes={this.state.palettes}
+                        // savePalette={this.savePalette}
+                        // palettes={this.state.palettes}
                         {...routeProps}
                       />
                     </Page>
@@ -75,8 +77,8 @@ class App extends React.Component {
                   render={(routeProps) => (
                     <Page>
                       <PaletteList
-                        palettes={this.state.palettes}
-                        deletePalette={this.deletePalette}
+                        // palettes={this.state.palettes}
+                        // deletePalette={this.deletePalette}
                         {...routeProps}
                       />
                     </Page>
@@ -113,8 +115,8 @@ class App extends React.Component {
                   render={(routeProps) => (
                     <Page>
                       <PaletteList
-                        palettes={this.state.palettes}
-                        deletePalette={this.deletePalette}
+                        // palettes={this.state.palettes}
+                        // deletePalette={this.deletePalette}
                         {...routeProps}
                       />
                     </Page>
@@ -128,13 +130,7 @@ class App extends React.Component {
     );
   }
 }
-
-const mapStateToProps = ({ palette }) => ({
-  currentPalette: palette.currentPalette,
-});
-
 const mapDispatchToProps = (dispatch) => ({
   setCurrentPalette: (palette) => dispatch(setCurrentPalette(palette)),
 });
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);

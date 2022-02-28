@@ -1,15 +1,21 @@
-import React from "react";
-import Palette from "./components/palette.component";
-import seedColors from "./seedColors";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setCurrentPalette } from "./redux/palette/palette.actions";
+import Palette from "./components/palette/palette.component";
 
-class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <Palette {...seedColors[5]} />
-      </div>
-    );
-  }
-}
+const App = () => {
+  const dispatch = useDispatch();
+  const handleSetCurrentPalette = () => dispatch(setCurrentPalette());
+
+  useEffect(() => {
+    handleSetCurrentPalette();
+  });
+
+  return (
+    <div>
+      <Palette />
+    </div>
+  );
+};
 
 export default App;

@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setCurrentPalette } from "./redux/palette/palette.actions";
+import { setCurrentPalette } from "./redux/palette/palette.slices";
 import Palette from "./components/palette/palette.component";
 
 const App = () => {
   const dispatch = useDispatch();
-  const handleSetCurrentPalette = () => dispatch(setCurrentPalette());
 
   useEffect(() => {
-    handleSetCurrentPalette();
-  });
+    dispatch(setCurrentPalette());
+  }, [dispatch]);
 
   return (
     <div>

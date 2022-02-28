@@ -8,7 +8,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(setCurrentPalette());
-  }, [dispatch]);
+  });
 
   return (
     <div>

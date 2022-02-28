@@ -1,9 +1,9 @@
 import { PaletteActionTypes } from "./palette.types";
+import { deletePaletteFromList, findPalette } from "./palette.utils";
 import seedColors from "../../seedColors";
-import { savedPalettes, syncLocalStorage } from "./palette.utils";
 
 const INITIAL_STATE = {
-  palettes: savedPalettes || seedColors,
+  palettes: seedColors,
 };
 
 const paletteReducer = (state = INITIAL_STATE, action) => {
@@ -22,11 +22,13 @@ const paletteReducer = (state = INITIAL_STATE, action) => {
     case PaletteActionTypes.DELETE_PALETTE:
       return {
         ...state,
-        palettes: state.palettes.filter(
-          (palette) => palette.id !== action.payload.id
-        ),
+        palettes: deletePaletteFromList(state.palettes, action.payload),
       };
-
+    case PaletteActionTypes.FIND_PALETTE:
+      return {
+        ...state,
+        palettes: findPalette(state.palettes, action.payload),
+      };
     default:
       return state;
   }

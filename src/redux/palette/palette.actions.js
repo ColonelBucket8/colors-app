@@ -13,3 +13,8 @@ export const deletePalette = (palette) => ({
   type: PaletteActionTypes.DELETE_PALETTE,
   payload: palette,
 });
+
+export const findPalette = (id) => ({
+  type: PaletteActionTypes.FIND_PALETTE,
+  paylaod: id,
+});

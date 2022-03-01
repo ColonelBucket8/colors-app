@@ -5,15 +5,16 @@ export const paletteSlice = createSlice({
   name: "palette",
   initialState: {
     palettes: seedColors,
+    copied: false,
   },
 
   reducers: {
-    setCurrentPalette: (state) => {
-      state.palettes = seedColors;
+    setCopied: (state) => {
+      state.copied = !state.copied;
     },
   },
 });
 
-export const { setCurrentPalette } = paletteSlice.actions;
+export const { setCopied } = paletteSlice.actions;
 
 export default paletteSlice.reducer;

@@ -1,14 +1,13 @@
-import React from "react";
-import { useToggle } from "../../hooks/useToggle";
+import React, { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import "./color-box.style.css";
 
 const ColorBox = ({ name, background }) => {
-  const [copied, setCopied] = useToggle(false);
+  const [copied, setCopied] = useState(false);
 
   const changeCopyState = () => {
-    setCopied();
-    setTimeout(() => setCopied(), 1500);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
   };
 
   return (

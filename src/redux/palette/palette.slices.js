@@ -15,6 +15,6 @@ export const paletteSlice = createSlice({
   },
 });
 
-export const { setCopied, setLevel } = paletteSlice.actions;
+export const { setLevel } = paletteSlice.actions;
 
 export default paletteSlice.reducer;

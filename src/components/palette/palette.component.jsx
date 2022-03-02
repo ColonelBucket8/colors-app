@@ -13,7 +13,7 @@ const Palette = ({ palette }) => {
   const [open, setOpen] = useState(false);
   const colors = palette.colors;
   const colorBox = colors[level].map((color) => (
-    <ColorBox key={color.name} background={color[format]} name={color.name} />
+    <ColorBox key={color.id} background={color[format]} name={color.name} />
   ));
 
   const changeLevel = (level) => {
@@ -39,6 +39,10 @@ const Palette = ({ palette }) => {
         open={open}
       />
       <div className="Palette-colors">{colorBox}</div>
+      <footer className="Palette-footer">
+        {palette.paletteName}
+        <span className="emoji">{palette.emoji}</span>
+      </footer>
     </div>
   );
 };

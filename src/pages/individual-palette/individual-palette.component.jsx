@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setLevel, setFormat } from "../../redux/palette/palette.slices";
-import Navbar from "../navbar/navbar.component";
-import ColorBox from "../color-box/color-box.component";
+import Navbar from "../../components/navbar/navbar.component";
+import ColorBox from "../../components/color-box/color-box.component";
 
-import "./palette.style.css";
+import "./individual-palette.style.css";
 
-const Palette = ({ palette }) => {
+const IndividualPalette = ({ palette }) => {
   const dispatch = useDispatch();
   const level = useSelector((state) => state.palette.level);
   const format = useSelector((state) => state.palette.format);
@@ -47,4 +47,4 @@ const Palette = ({ palette }) => {
   );
 };
 
-export default Palette;
+export default IndividualPalette;

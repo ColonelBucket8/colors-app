@@ -1,8 +1,8 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Palette from "./components/palette/palette.component";
-import PaletteList from "./components/palette-list/palette-list.component";
+import { Route, Switch } from "react-router-dom";
+import IndividualPalette from "./pages/individual-palette/individual-palette.component";
+import Homepage from "./pages/homepage/homepage.component";
 import { generatePalette } from "./colorHelpers";
 
 const App = () => {
@@ -11,27 +11,18 @@ const App = () => {
     return palettes.find((palette) => palette.id === id);
   };
   return (
-    // <div>
     <Switch>
-      <Route
-        exact
-        path="/"
-        render={() => <PaletteList palettes={palettes} />}
-      />
+      <Route exact path="/" component={Homepage} />
       <Route
         exact
         path="/palette/:id"
         render={(routeProps) => (
-          <Palette
+          <IndividualPalette
             palette={generatePalette(findPalette(routeProps.match.params.id))}
           />
         )}
       />
     </Switch>
-    // </div>
-    // <div>
-    //   <Palette palette={generatePalette(palettes[1])} />
-    // </div>
   );
 };
 

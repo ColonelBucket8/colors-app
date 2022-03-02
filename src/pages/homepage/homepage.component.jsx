@@ -1,9 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const PaletteList = ({ palettes }) => {
+const Homepage = () => {
+  const palettes = useSelector((state) => state.palette.palettes);
+
   return (
-    <div className="PaletteList">
+    <div className="Homepage">
       <h1>React Color</h1>
       {palettes.map((palette) => (
         <p>
@@ -14,4 +17,4 @@ const PaletteList = ({ palettes }) => {
   );
 };
 
-export default PaletteList;
+export default Homepage;

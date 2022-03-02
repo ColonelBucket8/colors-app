@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Palette from "./components/palette/palette.component";
+import PaletteList from "./components/palette-list/palette-list.component";
 import { generatePalette } from "./colorHelpers";
 
 const App = () => {
@@ -12,7 +13,11 @@ const App = () => {
   return (
     // <div>
     <Switch>
-      <Route exact path="/" render={() => <h1>Palette goes here</h1>} />
+      <Route
+        exact
+        path="/"
+        render={() => <PaletteList palettes={palettes} />}
+      />
       <Route
         exact
         path="/palette/:id"

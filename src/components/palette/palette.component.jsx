@@ -1,9 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setLevel } from "../../redux/palette/palette.slices";
+import Navbar from "../navbar/navbar.component";
 import ColorBox from "../color-box/color-box.component";
-import Slider from "rc-slider";
-import "rc-slider/assets/index.css";
 import "./palette.style.css";
 
 const Palette = ({ palette }) => {
@@ -19,15 +18,7 @@ const Palette = ({ palette }) => {
   };
   return (
     <div className="Palette">
-      <div className="slider">
-        <Slider
-          defaultValue={level}
-          min={100}
-          max={900}
-          step={100}
-          onAfterChange={changeLevel}
-        />
-      </div>
+      <Navbar level={level} changeLevel={changeLevel} />
       <div className="Palette-colors">{colorBox}</div>
     </div>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useParams } from "react-router-dom";
 import IndividualPalette from "./pages/individual-palette/individual-palette.component";
 import Homepage from "./pages/homepage/homepage.component";
 import { generatePalette } from "./colorHelpers";

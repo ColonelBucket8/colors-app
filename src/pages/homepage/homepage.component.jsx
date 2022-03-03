@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import MiniPalette from "../../components/mini-palette/mini-palette.component";
 import { withStyles } from "@material-ui/styles";
 
@@ -35,6 +35,10 @@ const styles = {
 };
 
 const Homepage = (props) => {
+  const history = useHistory();
+  const goToPalette = (id) => {
+    history.push(`/palette/${id}`);
+  };
   const { classes } = props;
   const palettes = useSelector((state) => state.palette.palettes);
 
@@ -46,7 +50,10 @@ const Homepage = (props) => {
         </nav>
         <div className={classes.palettes}>
           {palettes.map((palette) => (
-            <MiniPalette {...palette} />
+            <MiniPalette
+              {...palette}
+              handleClick={() => goToPalette(palette.id)}
+            />
           ))}
         </div>
       </div>

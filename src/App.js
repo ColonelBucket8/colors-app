@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import IndividualPalette from "./pages/individual-palette/individual-palette.component";
+import SingleColorPalette from "./pages/single-color-palette/single-color-palette.component";
 import Homepage from "./pages/homepage/homepage.component";
 import { generatePalette } from "./colorHelpers";
 
@@ -24,7 +25,7 @@ const App = () => {
       />
       <Route
         path="/palette/:paletteId/:colorId"
-        render={() => <h1>SINGLE COLOR PAGE</h1>}
+        render={() => <SingleColorPalette />}
       />
     </Switch>
   );

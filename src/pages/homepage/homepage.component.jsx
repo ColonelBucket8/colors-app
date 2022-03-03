@@ -11,9 +11,7 @@ const Homepage = () => {
       <MiniPalette />
       <h1>React Color</h1>
       {palettes.map((palette) => (
-        <p>
-          <Link to={`/palette/${palette.id}`}>{palette.paletteName}</Link>
-        </p>
+        <MiniPalette {...palette} />
       ))}
     </div>
   );

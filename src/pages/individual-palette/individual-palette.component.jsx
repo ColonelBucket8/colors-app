@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { setLevel, setFormat } from "../../redux/palette/palette.slices";
 import Navbar from "../../components/navbar/navbar.component";
 import ColorBox from "../../components/color-box/color-box.component";
+import PaletteFooter from "../../components/palette-footer/palette-footer.component";
 
 import "./individual-palette.style.css";
 
@@ -46,12 +47,10 @@ const IndividualPalette = ({ palette }) => {
         handleFormatChange={changeFormat}
         handleClick={handleClick}
         open={open}
+        showingAllColors
       />
       <div className="Palette-colors">{colorBox}</div>
-      <footer className="Palette-footer">
-        {palette.paletteName}
-        <span className="emoji">{palette.emoji}</span>
-      </footer>
+      <PaletteFooter paletteName={palette.paletteName} emoji={palette.emoji} />
     </div>
   );
 };

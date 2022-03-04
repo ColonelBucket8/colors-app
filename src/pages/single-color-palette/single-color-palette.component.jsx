@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { setFormat } from "../../redux/palette/palette.slices";
 import Navbar from "../../components/navbar/navbar.component";
 import ColorBox from "../../components/color-box/color-box.component";
@@ -30,14 +31,14 @@ const SingleColorPalette = ({ colorId, palette }) => {
   };
   const colorBoxes = shades.map((color) => (
     <ColorBox
-      key={color.id}
+      key={color.name}
       name={color.name}
       background={color[format]}
       showLink={false}
     />
   ));
   return (
-    <div className="Palette">
+    <div className="SingleColorPalette Palette">
       <Navbar
         format={format}
         handleFormatChange={changeFormat}
@@ -46,7 +47,14 @@ const SingleColorPalette = ({ colorId, palette }) => {
         showingAllColors={false}
       />
       <h1>SINGLE COLOR PALETTE</h1>
-      <div className="Palette-colors">{colorBoxes}</div>
+      <div className="Palette-colors">
+        {colorBoxes}
+        <div className="go-back ColorBox">
+          <Link to={`/palette/${palette.id}`} className="back-button">
+            Go Back
+          </Link>
+        </div>
+      </div>
       <PaletteFooter paletteName={palette.paletteName} emoji={palette.emoji} />
     </div>
   );

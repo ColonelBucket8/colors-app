@@ -10,7 +10,6 @@ import "./individual-palette.style.css";
 const IndividualPalette = ({ palette }) => {
   const dispatch = useDispatch();
   const location = useLocation();
-  console.log(location);
   const level = useSelector((state) => state.palette.level);
   const format = useSelector((state) => state.palette.format);
   const [open, setOpen] = useState(false);
@@ -22,6 +21,7 @@ const IndividualPalette = ({ palette }) => {
       name={color.name}
       id={color.id}
       currentUrl={location.pathname}
+      showLink={true}
     />
   ));
 

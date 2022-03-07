@@ -48,7 +48,6 @@ const SingleColorPalette = ({ colorId, palette, classes }) => {
         handleClick={handleClick}
         showingAllColors={false}
       />
-      <h1>SINGLE COLOR PALETTE</h1>
       <div className={classes.colors}>
         {colorBoxes}
         <div className={classes.goBack}>

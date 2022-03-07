@@ -5,10 +5,21 @@ import { setLevel, setFormat } from "../../redux/palette/palette.slices";
 import Navbar from "../../components/navbar/navbar.component";
 import ColorBox from "../../components/color-box/color-box.component";
 import PaletteFooter from "../../components/palette-footer/palette-footer.component";
-
+import { withStyles } from "@material-ui/styles";
 import "./individual-palette.style.css";
 
-const IndividualPalette = ({ palette }) => {
+const styles = {
+  IndividualPalette: {
+    height: "100vh",
+    display: "flex",
+    flexDirection: "column",
+  },
+  colors: {
+    height: "90%",
+  },
+};
+
+const IndividualPalette = ({ palette, classes }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const level = useSelector((state) => state.palette.level);
@@ -39,7 +50,7 @@ const IndividualPalette = ({ palette }) => {
     setOpen(false);
   };
   return (
-    <div className="Palette">
+    <div className={classes.IndividualPalette}>
       <Navbar
         format={format}
         level={level}
@@ -49,10 +60,10 @@ const IndividualPalette = ({ palette }) => {
         open={open}
         showingAllColors
       />
-      <div className="Palette-colors">{colorBox}</div>
+      <div className={classes.colors}>{colorBox}</div>
       <PaletteFooter paletteName={palette.paletteName} emoji={palette.emoji} />
     </div>
   );
 };
 
-export default IndividualPalette;
+export default withStyles(styles)(IndividualPalette);

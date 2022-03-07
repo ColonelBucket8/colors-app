@@ -22,7 +22,7 @@ const IndividualPalette = ({ palette }) => {
       name={color.name}
       id={color.id}
       currentUrl={location.pathname}
-      showLink={true}
+      showingFullPalette
     />
   ));
 

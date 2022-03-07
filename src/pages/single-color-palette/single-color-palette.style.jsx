@@ -1,4 +1,4 @@
-export default {
+const styles = {
   IndividualPalette: {
     height: "100vh",
     display: "flex",
@@ -38,3 +38,5 @@ export default {
     },
   },
 };
+
+export default styles;

@@ -6,18 +6,7 @@ import Navbar from "../../components/navbar/navbar.component";
 import ColorBox from "../../components/color-box/color-box.component";
 import PaletteFooter from "../../components/palette-footer/palette-footer.component";
 import { withStyles } from "@material-ui/styles";
-import "./individual-palette.style.css";
-
-const styles = {
-  IndividualPalette: {
-    height: "100vh",
-    display: "flex",
-    flexDirection: "column",
-  },
-  colors: {
-    height: "90%",
-  },
-};
+import styles from "./individual-palette.style";
 
 const IndividualPalette = ({ palette, classes }) => {
   const dispatch = useDispatch();

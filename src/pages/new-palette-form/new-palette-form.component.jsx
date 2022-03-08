@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setCurrentColor, setColors } from "../../redux/palette/palette.slices";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -73,8 +75,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NewPaletteForm = () => {
+  const currentColor = useSelector((state) => state.palette.currentColor);
+  const colors = useSelector((state) => state.palette.colors);
+  const dispatch = useDispatch();
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -82,6 +87,14 @@ const NewPaletteForm = () => {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const updateCurrentColor = (newColor) => {
+    dispatch(setCurrentColor(newColor.hex));
+  };
+
+  const addNewColor = () => {
+    dispatch(setColors([...colors, currentColor]));
   };
 
   return (
@@ -133,10 +146,15 @@ const NewPaletteForm = () => {
           </Button>
         </div>
         <ChromePicker
-          color="purple"
-          onChangeComplete={(newColor) => console.log(newColor)}
+          color={currentColor}
+          onChangeComplete={updateCurrentColor}
         />
-        <Button variant="contained" color="primary">
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ backgroundColor: currentColor }}
+          onClick={addNewColor}
+        >
           Add Color
         </Button>
       </Drawer>
@@ -146,6 +164,11 @@ const NewPaletteForm = () => {
         })}
       >
         <div className={classes.drawerHeader} />
+        <ul>
+          {colors.map((color) => (
+            <li style={{ backgroundColor: color }}>{color}</li>
+          ))}
+        </ul>
       </main>
     </div>
   );

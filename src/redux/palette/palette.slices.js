@@ -7,6 +7,8 @@ export const paletteSlice = createSlice({
     palettes: seedColors,
     level: 500,
     format: "hex",
+    currentColor: "teal",
+    colors: ["purple", "#e15784"],
   },
 
   reducers: {
@@ -16,9 +18,16 @@ export const paletteSlice = createSlice({
     setFormat: (state, action) => {
       state.format = action.payload;
     },
+    setCurrentColor: (state, action) => {
+      state.currentColor = action.payload;
+    },
+    setColors: (state, action) => {
+      state.colors = action.payload;
+    },
   },
 });
 
-export const { setLevel, setFormat, setPalette } = paletteSlice.actions;
+export const { setLevel, setFormat, setCurrentColor, setColors } =
+  paletteSlice.actions;
 
 export default paletteSlice.reducer;

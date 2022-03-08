@@ -7,19 +7,20 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
-import { withStyles } from "@material-ui/styles";
-import styles from "./navbar.style";
+import { useStyles } from "./navbar.style";
 
-const Navbar = ({
-  level,
-  changeLevel,
-  handleFormatChange,
-  format,
-  open,
-  handleClick,
-  showingAllColors,
-  classes,
-}) => {
+const Navbar = (props) => {
+  const classes = useStyles();
+  const {
+    level,
+    changeLevel,
+    handleFormatChange,
+    format,
+    open,
+    handleClick,
+    showingAllColors,
+  } = props;
+
   return (
     <header className={classes.Navbar}>
       <div className={classes.logo}>
@@ -72,4 +73,4 @@ const Navbar = ({
   );
 };
 
-export default withStyles(styles)(Navbar);
+export default Navbar;

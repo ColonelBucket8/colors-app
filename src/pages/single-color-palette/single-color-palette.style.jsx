@@ -1,4 +1,6 @@
-const styles = {
+import { makeStyles } from "@material-ui/core/styles";
+
+export const useStyles = makeStyles({
   IndividualPalette: {
     height: "100vh",
     display: "flex",
@@ -37,6 +39,4 @@ const styles = {
       textDecoration: "none",
     },
   },
-};
-
-export default styles;
+});

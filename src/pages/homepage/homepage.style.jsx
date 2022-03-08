@@ -1,4 +1,6 @@
-const styles = {
+import { makeStyles } from "@material-ui/core/styles";
+
+export const useStyles = makeStyles({
   root: {
     backgroundColor: "blue",
     height: "100vh",
@@ -31,6 +33,4 @@ const styles = {
     gridGap: "5%",
     color: "white",
   },
-};
-
-export default styles;
+});

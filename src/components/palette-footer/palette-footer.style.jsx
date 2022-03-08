@@ -1,4 +1,6 @@
-const styles = {
+import { makeStyles } from "@material-ui/core/styles";
+
+export const useStyles = makeStyles({
   PaletteFooter: {
     backgroundColor: "white",
     height: "5vh",
@@ -12,6 +14,4 @@ const styles = {
     fontSize: "1.5rem",
     margin: "0 1rem",
   },
-};
-
-export default styles;
+});

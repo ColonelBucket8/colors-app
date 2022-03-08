@@ -5,10 +5,11 @@ import { setLevel, setFormat } from "../../redux/palette/palette.slices";
 import Navbar from "../../components/navbar/navbar.component";
 import ColorBox from "../../components/color-box/color-box.component";
 import PaletteFooter from "../../components/palette-footer/palette-footer.component";
-import { withStyles } from "@material-ui/styles";
-import styles from "./individual-palette.style";
+import { useStyles } from "./individual-palette.style";
 
-const IndividualPalette = ({ palette, classes }) => {
+const IndividualPalette = (props) => {
+  const classes = useStyles();
+  const { palette } = props;
   const dispatch = useDispatch();
   const location = useLocation();
   const level = useSelector((state) => state.palette.level);
@@ -55,4 +56,4 @@ const IndividualPalette = ({ palette, classes }) => {
   );
 };
 
-export default withStyles(styles)(IndividualPalette);
+export default IndividualPalette;

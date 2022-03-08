@@ -5,10 +5,11 @@ import { setFormat } from "../../redux/palette/palette.slices";
 import Navbar from "../../components/navbar/navbar.component";
 import ColorBox from "../../components/color-box/color-box.component";
 import PaletteFooter from "../../components/palette-footer/palette-footer.component";
-import { withStyles } from "@material-ui/styles";
-import styles from "./single-color-palette.style";
+import { useStyles } from "./single-color-palette.style";
 
-const SingleColorPalette = ({ colorId, palette, classes }) => {
+const SingleColorPalette = (props) => {
+  const classes = useStyles();
+  const { colorId, palette } = props;
   const dispatch = useDispatch();
   const format = useSelector((state) => state.palette.format);
   const [open, setOpen] = useState(false);
@@ -59,4 +60,4 @@ const SingleColorPalette = ({ colorId, palette, classes }) => {
   );
 };
 
-export default withStyles(styles)(SingleColorPalette);
+export default SingleColorPalette;

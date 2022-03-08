@@ -1,18 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { withStyles } from "@material-ui/styles";
-import styles from "./color-box.style";
+import { useStyles } from "./color-box.style";
 
-const ColorBox = ({
-  name,
-  background,
-  id,
-  currentUrl,
-  showingFullPalette,
-  classes,
-}) => {
+const ColorBox = (props) => {
   const [copied, setCopied] = useState(false);
+  const classes = useStyles(props);
+  const { name, background, id, currentUrl, showingFullPalette } = props;
 
   const changeCopyState = () => {
     setCopied(true);
@@ -49,4 +43,4 @@ const ColorBox = ({
   );
 };
 
-export default withStyles(styles)(ColorBox);
+export default ColorBox;

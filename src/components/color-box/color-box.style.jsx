@@ -1,6 +1,7 @@
 import chroma from "chroma-js";
+import { makeStyles } from "@material-ui/core/styles";
 
-const styles = {
+export const useStyles = makeStyles({
   ColorBox: {
     width: "20%",
     height: (props) => (props.showingFullPalette ? "25%" : "50%"),
@@ -118,6 +119,4 @@ const styles = {
     transition: "all 0.4s ease-in-out",
     transitionDelay: "0.3s",
   },
-};
-
-export default styles;
+});

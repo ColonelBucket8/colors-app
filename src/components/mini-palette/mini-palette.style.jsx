@@ -1,4 +1,6 @@
-const styles = {
+import { makeStyles } from "@material-ui/core/styles";
+
+export const useStyles = makeStyles({
   root: {
     height: "190px",
     backgroundColor: "white",
@@ -40,6 +42,4 @@ const styles = {
     position: "relative",
     marginBottom: "-1.5%",
   },
-};
-
-export default styles;
+});

@@ -2,15 +2,14 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import MiniPalette from "../../components/mini-palette/mini-palette.component";
-import { withStyles } from "@material-ui/styles";
-import styles from "./homepage.style";
+import { useStyles } from "./homepage.style";
 
-const Homepage = (props) => {
+const Homepage = () => {
+  const classes = useStyles();
   const history = useHistory();
   const goToPalette = (id) => {
     history.push(`/palette/${id}`);
   };
-  const { classes } = props;
   const palettes = useSelector((state) => state.palette.palettes);
 
   return (
@@ -33,4 +32,4 @@ const Homepage = (props) => {
   );
 };
 
-export default withStyles(styles)(Homepage);
+export default Homepage;

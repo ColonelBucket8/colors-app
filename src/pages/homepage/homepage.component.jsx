@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import MiniPalette from "../../components/mini-palette/mini-palette.component";
 import { withStyles } from "@material-ui/styles";
 import styles from "./homepage.style";
@@ -18,6 +18,7 @@ const Homepage = (props) => {
       <div className={classes.container}>
         <nav className={classes.nav}>
           <h1>React Color</h1>
+          <Link to="/palette/new">Create Palette</Link>
         </nav>
         <div className={classes.palettes}>
           {palettes.map((palette) => (

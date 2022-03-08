@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import IndividualPalette from "./pages/individual-palette/individual-palette.component";
 import SingleColorPalette from "./pages/single-color-palette/single-color-palette.component";
 import Homepage from "./pages/homepage/homepage.component";
+import NewPaletteForm from "./pages/new-palette-form/new-palette-form.component";
 import { generatePalette } from "./colorHelpers";
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
   };
   return (
     <Switch>
+      <Route exact path="/palette/new" render={() => <NewPaletteForm />} />
       <Route exact path="/" component={Homepage} />
       <Route
         exact

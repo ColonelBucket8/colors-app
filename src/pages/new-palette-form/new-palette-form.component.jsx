@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setCurrentColor, setColors } from "../../redux/palette/palette.slices";
+import {
+  setCurrentColor,
+  setColors,
+  setPalettes,
+} from "../../redux/palette/palette.slices";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -90,6 +95,7 @@ const NewPaletteForm = () => {
   const currentColor = useSelector((state) => state.palette.currentColor);
   const colors = useSelector((state) => state.palette.colors);
   const dispatch = useDispatch();
+  const history = useHistory();
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [newName, setNewName] = useState("");
@@ -116,10 +122,22 @@ const NewPaletteForm = () => {
     setNewName(evt.target.value);
   };
 
+  const savePalette = () => {
+    let newName = "New Test Palette";
+    const newPalette = {
+      paletteName: newName,
+      id: newName.toLowerCase().replace(/ /g, "-"),
+      colors: colors,
+    };
+    dispatch(setPalettes(newPalette));
+    history.push("/");
+  };
+
   return (
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
+        color="default"
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
@@ -138,6 +156,9 @@ const NewPaletteForm = () => {
           <Typography variant="h6" noWrap>
             Persistent drawer
           </Typography>
+          <Button variant="contained" color="primary" onClick={savePalette}>
+            Save Palette
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer

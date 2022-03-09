@@ -12,6 +12,9 @@ export const paletteSlice = createSlice({
   },
 
   reducers: {
+    setPalettes: (state, action) => {
+      state.palettes = [...state.palettes, action.payload];
+    },
     setLevel: (state, action) => {
       state.level = action.payload;
     },
@@ -27,7 +30,7 @@ export const paletteSlice = createSlice({
   },
 });
 
-export const { setLevel, setFormat, setCurrentColor, setColors } =
+export const { setPalettes, setLevel, setFormat, setCurrentColor, setColors } =
   paletteSlice.actions;
 
 export default paletteSlice.reducer;

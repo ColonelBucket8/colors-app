@@ -27,10 +27,21 @@ export const paletteSlice = createSlice({
     setColors: (state, action) => {
       state.colors = action.payload;
     },
+    deleteColor: (state, action) => {
+      state.colors = state.colors.filter(
+        (color) => color.name !== action.payload
+      );
+    },
   },
 });
 
-export const { setPalettes, setLevel, setFormat, setCurrentColor, setColors } =
-  paletteSlice.actions;
+export const {
+  setPalettes,
+  setLevel,
+  setFormat,
+  setCurrentColor,
+  setColors,
+  deleteColor,
+} = paletteSlice.actions;
 
 export default paletteSlice.reducer;

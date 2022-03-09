@@ -4,6 +4,7 @@ import {
   setCurrentColor,
   setColors,
   setPalettes,
+  deleteColor,
 } from "../../redux/palette/palette.slices";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import clsx from "clsx";
@@ -238,7 +239,12 @@ const NewPaletteForm = () => {
         <div className={classes.drawerHeader} />
 
         {colors.map((color) => (
-          <DraggableColorBox color={color.color} name={color.name} />
+          <DraggableColorBox
+            key={color.name}
+            color={color.color}
+            name={color.name}
+            handleClick={() => dispatch(deleteColor(color.name))}
+          />
         ))}
       </main>
     </div>

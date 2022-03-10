@@ -4,7 +4,6 @@ import {
   setCurrentColor,
   setColors,
   setPalettes,
-  deleteColor,
 } from "../../redux/palette/palette.slices";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import clsx from "clsx";
@@ -19,9 +18,10 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Button from "@material-ui/core/Button";
-import DraggableColorBox from "../../components/draggable-color-box/draggable-color-box.component";
+import DraggableColorList from "../../components/draggable-color-list/draggable-color-list.component";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { ChromePicker } from "react-color";
+import { arrayMove } from "react-sortable-hoc";
 
 const drawerWidth = 400;
 
@@ -108,6 +108,9 @@ const NewPaletteForm = () => {
   const [newColorName, setNewColorName] = useState("");
   const [newPaletteName, setNewPaletteName] = useState("");
 
+  const maxColors = 20;
+  const paletteIsFull = colors.length >= maxColors;
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -136,6 +139,20 @@ const NewPaletteForm = () => {
     dispatch(setPalettes(newPalette));
     history.push("/");
   };
+
+  const addRandomColor = () => {
+    const allColors = palettes.map((p) => p.colors).flat();
+    let rand = Math.floor(Math.random() * allColors.length);
+    const randomColor = allColors[rand];
+    dispatch(setColors([...colors, randomColor]));
+  };
+
+  // const onSortEnd = ({ oldIndex, newIndex }) => {
+  //   const draggableColors = ({ colors }) =>
+  //     colors.arrayMove(colors, oldIndex, newIndex);
+  //   console.log(draggableColors());
+  //   // dispatch(setColors(draggableColor));
+  // };
 
   return (
     <div className={classes.root}>
@@ -195,10 +212,19 @@ const NewPaletteForm = () => {
         <Divider />
         <Typography variant="h4">Design Your Palette</Typography>
         <div>
-          <Button variant="contained" color="secondary">
-            Clear
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => dispatch(setColors([]))}
+          >
+            Clear color
           </Button>
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={addRandomColor}
+            disabled={paletteIsFull}
+          >
             Random Color
           </Button>
         </div>
@@ -225,9 +251,10 @@ const NewPaletteForm = () => {
             variant="contained"
             type="submit"
             color="primary"
-            style={{ backgroundColor: currentColor }}
+            disabled={paletteIsFull}
+            style={{ backgroundColor: paletteIsFull ? "grey" : currentColor }}
           >
-            Add Color
+            {paletteIsFull ? "Palette is full" : "Add color"}
           </Button>
         </ValidatorForm>
       </Drawer>
@@ -237,15 +264,8 @@ const NewPaletteForm = () => {
         })}
       >
         <div className={classes.drawerHeader} />
-
-        {colors.map((color) => (
-          <DraggableColorBox
-            key={color.name}
-            color={color.color}
-            name={color.name}
-            handleClick={() => dispatch(deleteColor(color.name))}
-          />
-        ))}
+        {/* onSortEnd={onSortEnd}  */}
+        <DraggableColorList colors={colors} axis="xy" />
       </main>
     </div>
   );

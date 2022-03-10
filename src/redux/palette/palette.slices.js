@@ -8,7 +8,7 @@ export const paletteSlice = createSlice({
     level: 500,
     format: "hex",
     currentColor: "teal",
-    colors: [{ color: "blue", name: "blue" }],
+    colors: seedColors[0].colors,
   },
 
   reducers: {

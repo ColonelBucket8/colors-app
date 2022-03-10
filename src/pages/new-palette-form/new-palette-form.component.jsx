@@ -70,26 +70,33 @@ const NewPaletteForm = () => {
           </IconButton>
         </div>
         <Divider />
-        <Typography variant="h4">Design Your Palette</Typography>
-        <div>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => dispatch(setColors([]))}
-          >
-            Clear color
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={addRandomColor}
-            disabled={paletteIsFull}
-          >
-            Random Color
-          </Button>
+        <div className={classes.container}>
+          <Typography variant="h4" gutterBottom>
+            Design Your Palette
+          </Typography>
+          <div className={classes.buttons}>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => dispatch(setColors([]))}
+              className={classes.button}
+            >
+              Clear color
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={addRandomColor}
+              disabled={paletteIsFull}
+              className={classes.button}
+            >
+              Random Color
+            </Button>
+          </div>
+          <ColorPickerForm paletteIsFull={paletteIsFull} colors={colors} />
         </div>
-        <ColorPickerForm paletteIsFull={paletteIsFull} colors={colors} />
       </Drawer>
+
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,

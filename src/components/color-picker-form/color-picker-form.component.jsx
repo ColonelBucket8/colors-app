@@ -4,6 +4,7 @@ import { setCurrentColor, setColors } from "../../redux/palette/palette.slices";
 import Button from "@material-ui/core/Button";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { ChromePicker } from "react-color";
+import useStyles from "./color-picker-form.style";
 
 const ColorPickerForm = ({ paletteIsFull, colors }) => {
   useEffect(() => {
@@ -15,7 +16,7 @@ const ColorPickerForm = ({ paletteIsFull, colors }) => {
     );
   });
   const dispatch = useDispatch();
-
+  const classes = useStyles();
   const currentColor = useSelector((state) => state.palette.currentColor);
   const [newColorName, setNewColorName] = useState("");
 
@@ -34,6 +35,7 @@ const ColorPickerForm = ({ paletteIsFull, colors }) => {
       <ChromePicker
         color={currentColor}
         onChangeComplete={updateCurrentColor}
+        className={classes.picker}
       />
       <ValidatorForm
         onSubmit={addNewColor}
@@ -41,7 +43,11 @@ const ColorPickerForm = ({ paletteIsFull, colors }) => {
       >
         <TextValidator
           value={newColorName}
+          className={classes.colorNameInput}
+          placeholder="Color Name"
           name="newColorName"
+          variants="filled"
+          margin="normal"
           onChange={(evt) => setNewColorName(evt.target.value)}
           validators={["required", "isColorNameUnique", "isColorUnique"]}
           errorMessages={[
@@ -55,6 +61,7 @@ const ColorPickerForm = ({ paletteIsFull, colors }) => {
           type="submit"
           color="primary"
           disabled={paletteIsFull}
+          className={classes.addColor}
           style={{ backgroundColor: paletteIsFull ? "grey" : currentColor }}
         >
           {paletteIsFull ? "Palette is full" : "Add color"}

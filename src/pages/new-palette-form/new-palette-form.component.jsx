@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setCurrentColor, setColors } from "../../redux/palette/palette.slices";
+import { setColors } from "../../redux/palette/palette.slices";
 import PaletteFormNav from "../../components/palette-form-nav/palette-form-nav.component";
+import ColorPickerForm from "../../components/color-picker-form/color-picker-form.component";
 import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
@@ -11,87 +11,15 @@ import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Button from "@material-ui/core/Button";
 import DraggableColorList from "../../components/draggable-color-list/draggable-color-list.component";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import { ChromePicker } from "react-color";
-import { arrayMove } from "react-sortable-hoc";
-
-const drawerWidth = 400;
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-  },
-  appBar: {
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  hide: {
-    display: "none",
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  drawerHeader: {
-    display: "flex",
-    alignItems: "center",
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: "flex-end",
-  },
-  content: {
-    flexGrow: 1,
-    height: "calc(100vh - 64px)",
-    padding: theme.spacing(3),
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: -drawerWidth,
-  },
-  contentShift: {
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
-  },
-}));
+import useStyles from "./new-palette-form.style";
+// import { arrayMove } from "react-sortable-hoc";
 
 const NewPaletteForm = () => {
-  useEffect(() => {
-    ValidatorForm.addValidationRule("isColorNameUnique", (value) =>
-      colors.every((color) => color.name.toLowerCase() !== value.toLowerCase())
-    );
-    ValidatorForm.addValidationRule("isColorUnique", (value) =>
-      colors.every((color) => color.color !== currentColor)
-    );
-  });
-
-  const currentColor = useSelector((state) => state.palette.currentColor);
   const colors = useSelector((state) => state.palette.colors);
   const palettes = useSelector((state) => state.palette.palettes);
   const dispatch = useDispatch();
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [newColorName, setNewColorName] = useState("");
 
   const maxColors = 20;
   const paletteIsFull = colors.length >= maxColors;
@@ -102,16 +30,6 @@ const NewPaletteForm = () => {
 
   const handleDrawerClose = () => {
     setOpen(false);
-  };
-
-  const updateCurrentColor = (newColor) => {
-    dispatch(setCurrentColor(newColor.hex));
-  };
-
-  const addNewColor = () => {
-    const newColor = { color: currentColor, name: newColorName };
-    dispatch(setColors([...colors, newColor]));
-    setNewColorName("");
   };
 
   const addRandomColor = () => {
@@ -170,35 +88,7 @@ const NewPaletteForm = () => {
             Random Color
           </Button>
         </div>
-        <ChromePicker
-          color={currentColor}
-          onChangeComplete={updateCurrentColor}
-        />
-        <ValidatorForm
-          onSubmit={addNewColor}
-          onError={(error) => console.log(error)}
-        >
-          <TextValidator
-            value={newColorName}
-            name="newColorName"
-            onChange={(evt) => setNewColorName(evt.target.value)}
-            validators={["required", "isColorNameUnique", "isColorUnique"]}
-            errorMessages={[
-              "Enter a color name",
-              "Color name must be unique",
-              "Color already used",
-            ]}
-          />
-          <Button
-            variant="contained"
-            type="submit"
-            color="primary"
-            disabled={paletteIsFull}
-            style={{ backgroundColor: paletteIsFull ? "grey" : currentColor }}
-          >
-            {paletteIsFull ? "Palette is full" : "Add color"}
-          </Button>
-        </ValidatorForm>
+        <ColorPickerForm paletteIsFull={paletteIsFull} colors={colors} />
       </Drawer>
       <main
         className={clsx(classes.content, {

@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   picker: {
-    width: "300px !important",
+    width: "350px !important",
     marginTop: "2rem",
   },
   addColor: {

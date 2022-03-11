@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PaletteMetaForm from "../palette-meta-form/palette-meta-form.component";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
@@ -12,6 +12,7 @@ import Button from "@material-ui/core/Button";
 import useStyles from "./palette-form-nav.style";
 
 const PaletteFormNav = ({ open, handleDrawerOpen }) => {
+  const [formShowing, setFormShowing] = useState(false);
   const classes = useStyles();
 
   return (
@@ -39,14 +40,26 @@ const PaletteFormNav = ({ open, handleDrawerOpen }) => {
           </Typography>
         </Toolbar>
         <div className={classes.navBtns}>
-          <PaletteMetaForm />
           <Link to="/">
-            <Button variant="contained" color="secondary">
+            <Button
+              variant="contained"
+              color="secondary"
+              className={classes.button}
+            >
               Go Back
             </Button>
           </Link>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => setFormShowing(true)}
+            className={classes.button}
+          >
+            Save
+          </Button>
         </div>
       </AppBar>
+      {formShowing && <PaletteMetaForm setFormShowing={setFormShowing} />}
     </div>
   );
 };

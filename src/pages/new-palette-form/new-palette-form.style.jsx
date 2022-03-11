@@ -1,36 +1,19 @@
+import { DRAWER_WIDTH } from "../../constants";
 import { makeStyles } from "@material-ui/core/styles";
 
-const drawerWidth = 400;
+const drawerWidth = DRAWER_WIDTH;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
-
   hide: {
     display: "none",
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-    display: "flex",
-    alignItems: "center",
-  },
-  drawerHeader: {
-    display: "flex",
-    alignItems: "center",
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: "flex-end",
   },
   content: {
     flexGrow: 1,
     height: "calc(100vh - 64px)",
-    padding: theme.spacing(3),
+    padding: theme.spacing(1),
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -44,19 +27,13 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
-  container: {
-    width: "100%",
-    height: "100%",
+  drawerHeader: {
     display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
     alignItems: "center",
-  },
-  buttons: {
-    width: "100%",
-  },
-  button: {
-    width: "50%",
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: "flex-end",
   },
 }));
 

@@ -35,9 +35,7 @@ const PaletteMetaForm = ({ setFormShowing }) => {
     setFormShowing(false);
   };
 
-  const handleSubmit = (emoji) => {
-    let newName = newPaletteName;
-
+  const handleSubmit = (newName, emoji, colors) => {
     const newPalette = {
       paletteName: newName,
       id: newName.toLowerCase().replace(/ /g, "-"),
@@ -55,7 +53,7 @@ const PaletteMetaForm = ({ setFormShowing }) => {
 
   const savePalette = (emoji) => {
     const newEmoji = emoji.native;
-    handleSubmit(newEmoji);
+    handleSubmit(newPaletteName, newEmoji, colors);
   };
 
   return (

@@ -1,15 +1,8 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { setColors } from "../../redux/palette/palette.slices";
+import { useSelector } from "react-redux";
 import PaletteFormNav from "../../components/palette-form-nav/palette-form-nav.component";
-import ColorPickerForm from "../../components/color-picker-form/color-picker-form.component";
+import DrawerMeta from "../../components/drawer-meta/drawer-meta.component";
 import clsx from "clsx";
-import Drawer from "@material-ui/core/Drawer";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import Button from "@material-ui/core/Button";
 import DraggableColorList from "../../components/draggable-color-list/draggable-color-list.component";
 import useStyles from "./new-palette-form.style";
 // import { arrayMove } from "react-sortable-hoc";
@@ -17,12 +10,8 @@ import useStyles from "./new-palette-form.style";
 const NewPaletteForm = () => {
   const colors = useSelector((state) => state.palette.colors);
   const palettes = useSelector((state) => state.palette.palettes);
-  const dispatch = useDispatch();
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-
-  const maxColors = 20;
-  const paletteIsFull = colors.length >= maxColors;
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -30,13 +19,6 @@ const NewPaletteForm = () => {
 
   const handleDrawerClose = () => {
     setOpen(false);
-  };
-
-  const addRandomColor = () => {
-    const allColors = palettes.map((p) => p.colors).flat();
-    let rand = Math.floor(Math.random() * allColors.length);
-    const randomColor = allColors[rand];
-    dispatch(setColors([...colors, randomColor]));
   };
 
   // const onSortEnd = ({ oldIndex, newIndex }) => {
@@ -49,54 +31,17 @@ const NewPaletteForm = () => {
   return (
     <div className={classes.root}>
       <PaletteFormNav
-        classes={classes}
         open={open}
         handleDrawerOpen={handleDrawerOpen}
         palettes={palettes}
         colors={colors}
       />
-      <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        anchor="left"
+      <DrawerMeta
+        colors={colors}
+        palettes={palettes}
         open={open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <div className={classes.container}>
-          <Typography variant="h4" gutterBottom>
-            Design Your Palette
-          </Typography>
-          <div className={classes.buttons}>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => dispatch(setColors([]))}
-              className={classes.button}
-            >
-              Clear color
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={addRandomColor}
-              disabled={paletteIsFull}
-              className={classes.button}
-            >
-              Random Color
-            </Button>
-          </div>
-          <ColorPickerForm paletteIsFull={paletteIsFull} colors={colors} />
-        </div>
-      </Drawer>
-
+        handleDrawerClose={handleDrawerClose}
+      />
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,

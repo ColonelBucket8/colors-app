@@ -32,6 +32,11 @@ export const paletteSlice = createSlice({
         (color) => color.name !== action.payload
       );
     },
+    deletePalette: (state, action) => {
+      state.palettes = state.palettes.filter(
+        (palette) => palette.paletteName !== action.payload
+      );
+    },
   },
 });
 
@@ -42,6 +47,7 @@ export const {
   setCurrentColor,
   setColors,
   deleteColor,
+  deletePalette,
 } = paletteSlice.actions;
 
 export default paletteSlice.reducer;

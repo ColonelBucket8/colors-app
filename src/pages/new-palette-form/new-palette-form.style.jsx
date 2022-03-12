@@ -7,9 +7,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
-  hide: {
-    display: "none",
-  },
+
   content: {
     flexGrow: 1,
     height: "calc(100vh - 64px)",

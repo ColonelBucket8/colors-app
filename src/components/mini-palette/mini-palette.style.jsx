@@ -9,8 +9,9 @@ export const useStyles = makeStyles({
     padding: "0.5rem",
     position: "relative",
     overflow: "hidden",
-    "&:hover": {
-      cursor: "pointer",
+    cursor: "pointer",
+    "&:hover svg": {
+      opacity: 1,
     },
   },
   colors: {
@@ -41,5 +42,18 @@ export const useStyles = makeStyles({
     margin: "0 auto",
     position: "relative",
     marginBottom: "-1.5%",
+  },
+  delete: {},
+  deleteIcon: {
+    color: "white",
+    backgroundColor: "#eb3d30",
+    width: "20px",
+    height: "20px",
+    position: "absolute",
+    right: "0px",
+    top: "0px",
+    padding: "10px",
+    zIndex: "10",
+    opacity: "0",
   },
 });

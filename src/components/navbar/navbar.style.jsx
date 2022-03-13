@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+import sizes from "../../sizes";
 
 export const useStyles = makeStyles({
   Navbar: {
@@ -21,6 +22,9 @@ export const useStyles = makeStyles({
       textDecoration: "none",
       color: "black",
     },
+    [sizes.down("xs")]: {
+      display: "none",
+    },
   },
   slider: {
     width: "340px",
@@ -41,6 +45,9 @@ export const useStyles = makeStyles({
       height: "13px",
       marginLeft: "-7px",
       marginTop: "-3px",
+    },
+    [sizes.down("md")]: {
+      width: "150px",
     },
   },
   selectContainer: {

@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
+import { addData, signInWithGoogle } from "../../firebase/firebase.utils";
 import MiniPalette from "../../components/mini-palette/mini-palette.component";
 import { useStyles } from "./homepage.style";
 
@@ -29,6 +30,7 @@ const Homepage = () => {
           ))}
         </div>
       </div>
+      <button onClick={signInWithGoogle}>Google</button>
     </div>
   );
 };

@@ -1,7 +1,5 @@
-import "firebase/compat/firestore";
 import { initializeApp } from "firebase/app";
-import { doc } from "firebase/firestore";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getFirestore, collection, addDoc, doc } from "firebase/firestore";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import seedColors from "../seedColors";
 
@@ -17,6 +15,17 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+export const addDataToFirestore = async () => {
+  try {
+    seedColors.map(async (object) => {
+      const docRef = await addDoc(collection(db, "palettes"), object);
+      console.log("Document written with ID: ", docRef.id);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const addCollectionAndDocument = async () => {
   const paletteRef = db.collection("palettes/g5YzyDnxul74xs49RWMq");

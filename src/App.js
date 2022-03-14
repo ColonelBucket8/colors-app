@@ -1,11 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import {
-  addCollectionAndDocument,
-  addDataToFirestore,
-  signInWithGoogle,
-} from "./firebase/firebase.utils";
+
 import IndividualPalette from "./pages/individual-palette/individual-palette.component";
 import SingleColorPalette from "./pages/single-color-palette/single-color-palette.component";
 import Homepage from "./pages/homepage/homepage.component";
@@ -13,10 +9,6 @@ import NewPaletteForm from "./pages/new-palette-form/new-palette-form.component"
 import { generatePalette } from "./colorHelpers";
 
 const App = () => {
-  // useEffect(() => {
-  //   addDataToFirestore();
-  // }, []);
-
   const palettes = useSelector((state) => state.palette.palettes);
   const findPalette = (id) => {
     return palettes.find((palette) => palette.id === id);

@@ -9,6 +9,7 @@ export const paletteSlice = createSlice({
     format: "hex",
     currentColor: "teal",
     colors: seedColors[0].colors,
+    isLoading: true,
   },
 
   reducers: {
@@ -37,6 +38,9 @@ export const paletteSlice = createSlice({
         (palette) => palette.paletteName !== action.payload
       );
     },
+    setIsLoading: (state) => {
+      state.isLoading = !state.isLoading;
+    },
   },
 });
 
@@ -48,6 +52,7 @@ export const {
   setColors,
   deleteColor,
   deletePalette,
+  setIsLoading,
 } = paletteSlice.actions;
 
 export default paletteSlice.reducer;

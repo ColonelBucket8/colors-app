@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, doc } from "firebase/firestore";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import seedColors from "../seedColors";
+import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD4XZxO59vAA0JvCILTQJbGeXrYE0pAWjM",
@@ -16,10 +16,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export const addDataToFirestore = async () => {
+export const addDataToFirestore = async (objectKey, objectsToAdd) => {
   try {
-    seedColors.map(async (object) => {
-      const docRef = await addDoc(collection(db, "palettes"), object);
+    objectsToAdd.map(async (object) => {
+      const docRef = await addDoc(collection(db, objectKey), object);
       console.log("Document written with ID: ", docRef.id);
     });
   } catch (error) {
@@ -27,21 +27,14 @@ export const addDataToFirestore = async () => {
   }
 };
 
-export const addCollectionAndDocument = async () => {
-  const paletteRef = db.collection("palettes/g5YzyDnxul74xs49RWMq");
-  const batch = db.batch();
-  const objectsToAdd = seedColors.map(({ paletteName, id, emoji, colors }) => ({
-    paletteName,
-    id,
-    emoji,
-    colors,
-  }));
-
-  objectsToAdd.forEach((obj) => {
-    const newDocRef = paletteRef.doc();
-    batch.set(newDocRef, obj);
-  });
-  return await batch.commit();
+export const snapshotToArray = (objectKey) => {
+  let docArray = [];
+  const query = async () => {
+    const querySnapshot = await getDocs(collection(db, objectKey));
+    querySnapshot.forEach((doc) => docArray.push(doc.data()));
+  };
+  query();
+  return docArray;
 };
 
 const auth = getAuth();

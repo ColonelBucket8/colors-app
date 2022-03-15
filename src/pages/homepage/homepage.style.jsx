@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import sizes from "../../sizes";
+import bg from "../../subtle-prism.svg";
 
 export const useStyles = makeStyles({
   root: {
@@ -8,6 +9,8 @@ export const useStyles = makeStyles({
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "center",
+    backgroundImage: `url(${bg})`,
+    overflow: "scroll",
   },
   container: {
     width: "50%",
@@ -22,14 +25,17 @@ export const useStyles = makeStyles({
       width: "75%",
     },
   },
+  heading: {
+    fontSize: "2rem",
+  },
   nav: {
     display: "flex",
     width: "100%",
     justifyContent: "space-between",
     alignItems: "center",
-    color: "white",
+    color: "black",
     "& a": {
-      color: "white",
+      color: "black",
     },
   },
   palettes: {
@@ -44,7 +50,7 @@ export const useStyles = makeStyles({
     },
     [sizes.down("xs")]: {
       gridTemplateColumns: "repeat(1, 100%)",
-      gripGap: "1rem",
+      gripGap: "1.4rem",
     },
   },
 });

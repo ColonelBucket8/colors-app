@@ -31,7 +31,9 @@ export const snapshotToArray = (objectKey) => {
   let docArray = [];
   const query = async () => {
     const querySnapshot = await getDocs(collection(db, objectKey));
-    querySnapshot.forEach((doc) => docArray.push(doc.data()));
+    querySnapshot.forEach((doc) => {
+      docArray.push(doc.data());
+    });
   };
   query();
   return docArray;

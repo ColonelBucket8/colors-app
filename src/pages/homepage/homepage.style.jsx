@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+import sizes from "../../sizes";
 
 export const useStyles = makeStyles({
   root: {
@@ -14,6 +15,12 @@ export const useStyles = makeStyles({
     alignItems: "flex-start",
     flexDirection: "column",
     flexWrap: "wrap",
+    [sizes.down("xl")]: {
+      width: "80%",
+    },
+    [sizes.down("xs")]: {
+      width: "75%",
+    },
   },
   nav: {
     display: "flex",
@@ -30,7 +37,14 @@ export const useStyles = makeStyles({
     width: "100%",
     display: "grid",
     gridTemplateColumns: "repeat(3, 30%)",
-    gridGap: "5%",
+    gridGap: "2.5rem",
     color: "white",
+    [sizes.down("md")]: {
+      gridTemplateColumns: "repeat(2, 50%)",
+    },
+    [sizes.down("xs")]: {
+      gridTemplateColumns: "repeat(1, 100%)",
+      gripGap: "1rem",
+    },
   },
 });

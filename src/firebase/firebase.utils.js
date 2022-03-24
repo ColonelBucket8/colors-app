@@ -1,5 +1,11 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  serverTimestamp,
+} from "firebase/firestore";
 
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
@@ -14,12 +20,15 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+export const db = getFirestore(app);
 
 export const addDataToFirestore = async (objectKey, objectsToAdd) => {
   try {
     objectsToAdd.map(async (object) => {
-      const docRef = await addDoc(collection(db, objectKey), object);
+      const docRef = await addDoc(collection(db, objectKey), {
+        ...object,
+        timestamp: serverTimestamp(),
+      });
       console.log("Document written with ID: ", docRef.id);
     });
   } catch (error) {
